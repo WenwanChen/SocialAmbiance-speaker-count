@@ -9,32 +9,32 @@ Step 1: Remove silent segments using pre-trained Voice Activity Detection: https
 Suppose that audio recordings of participant_id is stored in /dataroot/Baylor/id, the first step is to remove all the silent segments. \
    | runSegment.sh\
    |---- 2h.py // just to prevent stackoverflow\
-   |---- inaSpeechSegmenter toolkit\
+   |---- inaSpeechSegmenter toolkit
    
 Step 2: Prepare 5s segments to feed into neural network\
    | preparation.sh\
-   |---- 5s.py \
+   |---- 5s.py 
    
 Step 3: Kaldi-format Feature extaction \
 Acoustic features are extracted using Kaldi toolkit, and deep embedding features are extracted using trained neural networks\
    | toKaldiFormat.sh\
-   |---- model.py  // models are defined based on https://github.com/Snowdar/asv-subtools/blob/master/pytorch/model/resnet-xvector.py\
+   |---- model.py  // models are defined based on https://github.com/Snowdar/asv-subtools/blob/master/pytorch/model/resnet-xvector.py
    
 Step 4: Back-end scoring and domain adaptation\
 Extracted embeddings are scored and adapted to generalize the algorithm using Kaldi\
    | backend.sh\
-   |---- score.py\
+   |---- score.py
    
 ![image](https://user-images.githubusercontent.com/41505580/130548488-82207ef3-c93a-40b9-b4ad-15c461fc6a9d.png)
 
 Step 5: Statistical analysis results: \
 1. Social Ambiance Measure (SAM) Differences Between Groups\
-Figure 2  illustrates that social ambiance patterns extracted from participants with depressive or psychotic disorders were significantly different from healthy controls. \
+Figure 2  illustrates that social ambiance patterns extracted from participants with depressive or psychotic disorders were significantly different from healthy controls. 
 ![Figure2](https://user-images.githubusercontent.com/41505580/130549094-10d4ebfc-d725-46ff-818b-72137d8fc1a4.jpeg)
 
 
 2. Relationship Between Social Ambiance Measure (SAM) and Self-Reported Measures\
-Social ambiance patterns, while linked to some personality traits for healthy controls, were found associated with psychometric scores for participants with depressive or psychotic disorders.\
+Social ambiance patterns, while linked to some personality traits for healthy controls, were found associated with psychometric scores for participants with depressive or psychotic disorders.
 ![table](https://user-images.githubusercontent.com/41505580/130549103-c2e5f091-42d7-4640-9c4b-a2d5865e8f45.jpeg)
 
 For more details, please refer to our paper:
@@ -43,7 +43,7 @@ For more details, please refer to our paper:
 
 **How to prepare training data**
 
-Overlapped speech creation:\
+Overlapped speech creation:
 We utilize LibriSpeech corpus to create overlapped speech. By combining three LibriSpeech subsets, clean-360, clean-100 and other-500, I get 960 hours of speech in utterances from 2338 speakers (1228 female speakers and 1210 male speakers), sampled at 16 kHz. Utterances were segmented when the silence intervals were longer than 0.3 seconds or coincided with sentence breaks in the reference text.
 
 ![image](https://user-images.githubusercontent.com/41505580/130540735-6d580b1f-081d-4443-a7bd-e57a9f6918a3.png)
